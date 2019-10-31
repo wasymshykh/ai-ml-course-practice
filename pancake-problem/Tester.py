@@ -1,10 +1,18 @@
 from main_classes.PancakeProblem import PancakeProblem
+
 from bfs_classes.Search import Search as BFS_Search
 from bfs_classes.BreadthFirstSearchStrategy import BreadthFirstSearchStrategy
+
 from dfs_classes.Search import Search as DFS_Search
 from dfs_classes.DepthFirstSearchStrategy import DepthFirstSearchStrategy
+
 from ucs_classes.Search import Search as UCS_Search
 from ucs_classes.UniformCostSearchStrategy import UniformCostSearchStrategy
+
+from greedy_classes.Search import Search as Greedy_Search
+from greedy_classes.GreedySearchStrategy import GreedySearchStrategy
+from greedy_classes.LargestPancakePositionHeuristic import LargestPancakePositionHeuristic
+
 
 # initial = [1, 3, 2, 4, 5]
 # goal = [1, 2, 3, 4, 5]
@@ -43,6 +51,16 @@ uc_search = UCS_Search(pp, ucs)
 ucs_result = uc_search.start_ucs()
 uc_search.print_result(ucs_result)
 '''
+
+# '''
+# Greedy Search
+heuristic = LargestPancakePositionHeuristic(goal)
+greedy = GreedySearchStrategy(heuristic)
+greedy_search = Greedy_Search(pp, greedy)
+
+greedy_result = greedy_search.start_greedy()
+greedy_search.print_result(greedy_result)
+# '''
 
 
 
