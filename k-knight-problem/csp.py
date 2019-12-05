@@ -66,7 +66,7 @@ class CSP:
 
     def getNeighbour(self, variable, constraint):
         neigh = []
-        for va in constraint.getScope():
+        for va in constraint.scope():
             if va != variable and (va not in neigh):
                 neigh.append(va)
         return neigh

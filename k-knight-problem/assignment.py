@@ -42,6 +42,9 @@ class Assignment:
     def has_assignment(self, var):
         return var in self._value_variable
 
+    def get_variables(self):
+        return self._variables
+
     def __str__(self):
         result = []
 
@@ -53,7 +56,7 @@ class Assignment:
 
         for var in self._variables:
             val = self._value_variable[var]
-            result[val[0]-1][val[1]-1] = "K"
+            result[val[0]-1][val[1]-1] = var.get_name()
 
         toprint = ""
         for i in range(0, len(result)):
