@@ -77,3 +77,6 @@ class CSP:
             if val != value:
                 values.append(val)
         self._domainOfVariable[variable] = values
+
+    def getListOfConstraints(self):
+        return self._constraints

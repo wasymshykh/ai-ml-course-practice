@@ -24,11 +24,11 @@ from a_star_classes.PancakePositionHeuristic import PancakePositionHeuristic
 # initial = [1, 3, 2, 4, 5, 7, 6]
 # goal = [1, 2, 3, 4, 5, 6, 7]
 
-initial = [1, 3, 2, 4, 5, 7, 6, 10, 8, 9]
-goal = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# initial = [1, 3, 2, 4, 5, 7, 6, 10, 8, 9]
+# goal = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-# initial = [1, 3, 2]
-# goal = [1, 2, 3]
+initial = [1, 3, 2, 4]
+goal = [1, 2, 3, 4]
 
 pp = PancakeProblem(initial, goal)
 
@@ -69,7 +69,7 @@ greedy_result = greedy_search.start_greedy()
 greedy_search.print_result(greedy_result)
 '''
 
-'''
+# '''
 # A* Search
 heuristic = PancakePositionHeuristic(goal)
 a_star = AStarSearchStrategy(heuristic)
@@ -77,7 +77,7 @@ a_star_search = AStar_Search(pp, a_star)
 
 a_star_result = a_star_search.start_a_star()
 a_star_search.print_result(a_star_result)
-'''
+# '''
 
 
 

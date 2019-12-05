@@ -1,6 +1,10 @@
 from nonattackingconstraint import NonAttackingConstraint
 from csp import CSP
 from variable import Variable
+from backtrackingSearch import BactrackingSearch
+from inferenceInfo import InferenceInfo
+from simpleInference import SimpleInference
+from consoleListener import ConsoleListener
 
 if __name__ == '__main__':
 
@@ -15,8 +19,8 @@ if __name__ == '__main__':
     # variables = [Variable("K1"), Variable("K2")]
 
     domains = []
-    for i in range(1, n):
-        for j in range(1, m):
+    for i in range(1, n+1):
+        for j in range(1, m+1):
             domains.append((i, j))
 
     constraints = []
@@ -26,5 +30,8 @@ if __name__ == '__main__':
 
     csp = CSP(variables, domains, constraints)
 
+    inPro = SimpleInference()
+    bts = BactrackingSearch(inPro, [ConsoleListener()], variableOrdering=True)
+    bts.solve(csp)
 
 

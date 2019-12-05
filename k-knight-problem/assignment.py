@@ -21,10 +21,10 @@ class Assignment:
 
     def get_assignment(self, var: Variable):
         if var not in self._value_variable:
-            return None
+            return 0, 0
         return self._value_variable[var]
 
-    def is_consistent(self, constraints: List[NonAttackingConstraint]):
+    def is_consistent(self, constraints: List):
         for con in constraints:
             if not con.is_consistent(self):
                 return False
@@ -44,16 +44,19 @@ class Assignment:
 
     def __str__(self):
         result = []
-        st = ""
-        for i in range(1, 5):
-            for j in range(1, 5):
-                flag = False
-                for var in self._variables:
-                    if var[0] == i and var[1] == j:
-                        st += " K"
-                        flag = True
-                if not flag:
-                    st += " A"
-            result.append(st)
 
-        return str(result)
+        for _ in range(1, 4):
+            temp = []
+            for _ in range(1, 4):
+                temp.append("A")
+            result.append(temp)
+
+        for var in self._variables:
+            val = self._value_variable[var]
+            result[val[0]-1][val[1]-1] = "K"
+
+        toprint = ""
+        for i in range(0, len(result)):
+            toprint += str(result[i]) + "\n"
+
+        return toprint
