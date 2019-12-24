@@ -50,7 +50,7 @@ class BactrackingSearch(SearchStrategy):
         
         if not self._variableOrdering:
             for var in csp.getVariables():
-                if not assignment.hasAssignmentFor(var):
+                if not assignment.has_assignment(var):
                     return var
         else:
             minimum = math.inf
@@ -62,7 +62,7 @@ class BactrackingSearch(SearchStrategy):
                         resVar = var
             return resVar
     
-    def orderDomainValues(self,csp,var):
+    def orderDomainValues(self, csp, var):
         return csp.getDomainValues(var)
     
     def fireListeners(self,csp,assignment):

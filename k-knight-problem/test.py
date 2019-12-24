@@ -25,6 +25,7 @@ if __name__ == '__main__':
         for j in range(1, m+1):
             domains.append((i, j))
 
+
     constraints = []
     for knight in range(0, k):
         for i in range(knight+1, k):
@@ -39,22 +40,12 @@ if __name__ == '__main__':
     csp = CSP(variables, domains, constraints)
 
 
-    '''
-    inPro = ForwardCheckingInference()
-    bts = BactrackingSearch(inPro, [ConsoleListener(n, m)], variableOrdering=True)
+    inf = SimpleInference()
+    inf = ForwardCheckingInference()
+    bts = BactrackingSearch(inf, [ConsoleListener(n, m)])
     start_at = time.time()
     bts.solve(csp)
     print(time.time() - start_at)
-    '''
-
-    ''''''
-    #inPro = SimpleInference()
-    inPro = ForwardCheckingInference()
-    bts = BactrackingSearch(inPro, [ConsoleListener(n, m)], variableOrdering=True, valueOrdering=True)
-    start_at = time.time()
-    bts.solve(csp)
-    print(time.time() - start_at)
-    ''''''
 
 
 
