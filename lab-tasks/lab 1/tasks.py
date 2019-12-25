@@ -69,25 +69,57 @@ def merge_sort(a, n):
         print(str(a))
 
 
+def quick_sort(a, n_min, n_max):
+    if n_max > n_min:
+
+        pivot = pivot_find(a, n_min, n_max)
+        quick_sort(a, n_min, pivot)
+        quick_sort(a, pivot + 1, n_max - 1)
+
+        if len(a) == n_max:
+            print(str(a))
+
+
+def pivot_find(a, n_min, n_max):
+    i = n_min - 1
+    n_max = n_max - 1
+    pivot = a[n_max - 1]
+    for j in range(n_min, n_max):
+        if a[j] < pivot:
+            i += 1
+            t = a[i]
+            a[i] = a[j]
+            a[j] = t
+    i += 1
+    t = a[i]
+    a[i] = a[n_max]
+    a[n_max] = t
+
+    return i
+
+
 if __name__ == '__main__':
+
+    arr = [11, 5, 6, 9, 10, 25, 14]
 
     '''
         Task 1
         Write a insertionSort function in Python using list comprehensions.
     '''
-    arr = [11, 5, 6, 9, 10, 25, 14]
     # insertion_sort(arr)
 
     '''
         Task 2
         Write a mergeSort function in Python
     '''
-    merge_sort(arr, len(arr))
+    # merge_sort(arr, len(arr))
 
     '''
         Task 3
         Write a quickSort function in python 
     '''
+    quick_sort(arr, 0, len(arr))
+
 
 
 
