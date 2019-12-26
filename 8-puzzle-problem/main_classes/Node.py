@@ -12,3 +12,7 @@ class Node:
 
     def __str__(self):
         return "State[" + self.state.string_rep() + "] - Action[" + self.action + "] - Cost[" + str(self.cost) + "]"
+
+    def __gt__(self, other):
+        return self.cost > other.cost
+

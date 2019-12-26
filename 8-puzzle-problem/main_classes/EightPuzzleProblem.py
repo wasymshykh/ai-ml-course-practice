@@ -27,7 +27,7 @@ class EightPuzzleProblem(SearchProblem):
 
     def successor_function(self, cur_state: EightPuzzleState):
 
-        next_moveEightPuzzleProblems = []
+        next_moves = []
         empty_row, empty_col = 0, 0
         current_state = cur_state.get_current_state()
 

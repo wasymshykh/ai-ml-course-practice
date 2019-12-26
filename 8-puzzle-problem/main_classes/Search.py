@@ -1,15 +1,14 @@
-from bfs_classes.Node import Node
-from bfs_classes.BreadthFirstSearchStrategy import BreadthFirstSearchStrategy
+from main_classes.Node import Node
 from main_classes.EightPuzzleProblem import EightPuzzleProblem
 
 
 class Search:
     search_problem: EightPuzzleProblem
-    search_strategy: BreadthFirstSearchStrategy
 
     def __init__(self, search_problem, search_strategy):
         self.search_problem = search_problem
         self.search_strategy = search_strategy
+        self.node_expanded = 0
 
     def solve_problem(self):
         node = Node(self.search_problem.initial_state(), None, 0, 0, '')
@@ -22,6 +21,7 @@ class Search:
         result = None
 
         while not self.search_strategy.is_empty():
+            self.node_expanded += 1
             current_node = self.search_strategy.remove_node()
 
             if self.search_problem.is_goal(current_node.state):
@@ -41,7 +41,7 @@ class Search:
 
     def print_result(self, result: Node):
         if result.parent is None:
-            print("Game Starts")
+            print("Game Starts [%d nodes expanded]" % self.node_expanded)
             print("Initial State: %s" % result.state.get_current_state())
             return
         self.print_result(result.parent)
