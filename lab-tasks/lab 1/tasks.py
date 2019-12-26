@@ -7,11 +7,12 @@ def insertion_sort(a):
             while t > 0:
                 if a[t - 1] > a[t]:
                     temp = a[t]
-                    a[t] = a[t-1]
-                    a[t-1] = temp
+                    a[t] = a[t - 1]
+                    a[t - 1] = temp
                     print("-> " + str(a))
                 t -= 1
     print("Ending with: " + str(a))
+
 
 import math
 
@@ -24,6 +25,7 @@ import math
             n => size of original array
             
 '''
+
 
 def merge_sort(a, n):
     if len(a) < 2:
@@ -100,11 +102,17 @@ def pivot_find(a, n_min, n_max):
 
 if __name__ == '__main__':
 
+    # Write a list comprehension which generates a lowercase version of each string that has length greater than five.
+    str_array = ["Ali", "Ahmed Zia"]
+    ls_str_array = [s.lower() for s in str_array if s.__len__() > 5]
+    print(ls_str_array)
+
+
     arr = [11, 5, 6, 9, 10, 25, 14]
 
     '''
         Task 1
-        Write a insertionSort function in Python using list comprehensions.
+        Write a insertionSort function in Python
     '''
     # insertion_sort(arr)
 
@@ -119,8 +127,3 @@ if __name__ == '__main__':
         Write a quickSort function in python 
     '''
     quick_sort(arr, 0, len(arr))
-
-
-
-
-
