@@ -11,9 +11,9 @@ import time
 
 if __name__ == '__main__':
 
-    n = 3
-    m = 3
-    k = 5
+    n = 5
+    m = 5
+    k = 10
 
     variables = []
 
@@ -33,7 +33,7 @@ if __name__ == '__main__':
                 # print("K" + str(knight+1) + " and K" + str(i+1))
                 constraints.append(NonAttackingConstraint(variables[knight], variables[i]))
 
-    n_q = 5
+    '''n_q = 5
     m_q = 5
     q = 2
     variables = []
@@ -50,7 +50,7 @@ if __name__ == '__main__':
         for i in range(queen+1, q):
             if queen != i:
                 constraints.append(NQueenConstraint(variables[queen], variables[i], [n_q,m_q]))
-
+'''
 
     csp = CSP(variables, domains, constraints)
 
