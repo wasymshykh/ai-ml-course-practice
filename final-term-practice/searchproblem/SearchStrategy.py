@@ -29,7 +29,7 @@ class BFSSearch(SearchStrategy):
         self.queue.put(node)
 
     def remove_node(self):
-        self.queue.get()
+        return self.queue.get()
 
 
 class Search:
@@ -49,15 +49,26 @@ class Search:
         while not self._strategy.is_empty():
             current_node = self._strategy.remove_node()
 
-            if self._problem.is_goal(current_node):
+            if self._problem.is_goal(current_node.state):
                 result = current_node
                 break
 
-            next_moves = self._problem.successor(current_node.state)
+            next_moves = self._problem.successor(current_node.state.get_current_state())
 
             for n_s in next_moves:
-                if n_s not in duplicate:
-                    new_node = Node(n_s, current_node, current_node.depth+1, current_node.cost+n_s.cost, n_s.action)
+                if n_s.string_rep() not in duplicate:
+                    new_node = Node(n_s, current_node, current_node.depth+1, current_node.cost+n_s.get_cost(), n_s.get_action())
                     duplicate[new_node.state.string_rep()] = new_node.state.string_rep()
                     self._strategy.add_node(new_node)
         return result
+
+    def get_result(self, result):
+
+        if result.parent_node is None:
+            print("Started!")
+            return
+
+        self.get_result(result.parent_node)
+        print(result)
+
+

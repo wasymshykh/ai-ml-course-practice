@@ -7,5 +7,5 @@ class Node:
         self.action = action
 
     def __str__(self):
-        return "{} -- {} -- {}".format(self.state, self.cost, self.action)
+        return "{} -- {} -- {}".format(self.state.string_rep(), self.cost, self.action)
 
