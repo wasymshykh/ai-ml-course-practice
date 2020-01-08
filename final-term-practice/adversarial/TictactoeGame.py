@@ -58,7 +58,7 @@ class TictactoeGame:
         new_state = state.copy()
         player = self.get_player(state)
 
-        new_state.getboard()[action[0], action[1]] = player.symbol
+        new_state.get_board()[action[0]][action[1]] = player.symbol
         new_state.set_move((new_state.get_move() + 1) % 2)
 
         win_found = True
@@ -66,7 +66,7 @@ class TictactoeGame:
         for p in self._winning_positions:
             win_found = True
             for t_p in p:
-                if new_state.getboard()[t_p[0]][t_p[1]] != player.symbol:
+                if new_state.get_board()[t_p[0]][t_p[1]] != player.symbol:
                     win_found = False
                     break
             if win_found:

@@ -36,6 +36,9 @@ class TictactoeState:
     def get_action(self):
         return self._action
 
-    def str(self):
+    def get_board(self):
+        return self._board
+
+    def __str__(self):
         return "{}_{}".format(str(self._board), self._move)
 
