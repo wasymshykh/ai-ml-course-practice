@@ -7,98 +7,64 @@ let n = x.length
 let w0 = 0.5
 let w1 = 0.5
 let learning_rate = 0.1
-let error_tolerance = 0.1
 let iterations = 3
 
-
-
 const gradient_descent_batch_method = () => {
-    console.log(`X \t Y \t Yp \t Err`);
     for (let iteration = 0; iteration < iterations; iteration++) {
-    
+        console.log(`iteration-> ${iteration+1} \t w0 -> {${w0}} \t w1 -> {${w1}}`);
+        
+        console.log(`X \t Y \t Yp \t Err`);
         err = 0;
         for (let i = 0; i < n; i++) {
             yp = w0 + w1 * x[i];
             err += y[i] - yp;
-            console.log(`${x[i]} \t ${y[i]} \t ${yp} \t ${y[i] - yp}`);
+            console.log(`${x[i]} \t ${y[i]} \t ${yp.toFixed(3)} \t ${(y[i] - yp).toFixed(3)}`);
         }
-    
-        w0output = `${w0.toFixed(5)} + (${learning_rate} x (2/${n}) x (`;
-    
-        w1output = `${w1.toFixed(5)} + (${learning_rate} x (2/${n}) x (`;
-    
+        
+        /* Summission part of equation */
         let w0sum = 0;
         let w1sum = 0;
         for (let i = 0; i < n; i++) {
             w0sum += (y[i] - w0 - (w1*x[i]))
-            w0output += ` (${y[i]} - ${w0.toFixed(5)} - (${w1.toFixed(5)} x ${x[i]})) +`
-            
             w1sum += (y[i] - w0 - (w1*x[i]))*(x[i])
-            w1output += ` (${y[i]} - ${w0.toFixed(5)} - (${w1.toFixed(5)} x ${x[i]})) x ${x[i]}) +`
         }
-        
-        w0output += `) )`;
-    
-        console.log("w0-> ", w0output);
-        console.log("w1-> ", w1output);
-    
+
+        /* Combining everything in equation */
         w0 = w0 + (learning_rate * (2/n) * w0sum);
         w1 = w1 + (learning_rate * (2/n) * w1sum);
         
-        // if(Math.abs(err/n) < error_tolerance) {
-            console.log('err->', err/n);
-            console.log(`i-> ${iteration+1} w0 -> {${w0}} and w1 -> {${w1}}`);
-            // break;
-        // }
-        console.log('-----------------------------------------------');
+        console.log(`error-> ${err/n}\n`);
     }
 }
 
-gradient_descent_batch_method()
+// gradient_descent_batch_method()
 
 
 
 const gradient_descent_stochastic_method = () => {
     
-    console.log(`X \t Y \t Yp \t Err`);
     for (let iteration = 0; iteration < n; iteration++) {
-    
+        console.log(`iteration-> ${iteration+1} \t w0 -> {${w0}} \t w1 -> {${w1}}`);
+        
+        console.log(`X \t Y \t Yp \t Err`);
         err = 0;
         for (let i = 0; i < n; i++) {
             yp = w0 + w1 * x[i];
             err += y[i] - yp;
-            console.log(`${x[i]} \t ${y[i]} \t ${yp} \t ${y[i] - yp}`);
+            console.log(`${x[i]} \t ${y[i]} \t ${yp.toFixed(3)} \t ${(y[i] - yp).toFixed(3)}`);
         }
-    
-        w0output = `${w0.toFixed(5)} + (${learning_rate} x (`;
-    
-        w1output = `${w1.toFixed(5)} + (${learning_rate} x (`;
-    
+        
         let w0sum = (y[iteration] - w0 - (w1*x[iteration]))
-        w0output += ` (${y[iteration]} - ${w0.toFixed(5)} - (${w1.toFixed(5)} x ${x[iteration]})) +`
-        
         let w1sum = (y[iteration] - w0 - (w1*x[iteration]))*(x[iteration])
-        w1output += ` (${y[iteration]} - ${w0.toFixed(5)} - (${w1.toFixed(5)} x ${x[iteration]})) x ${x[iteration]}) +`
         
-        
-        w0output += `) )`;
-    
-        console.log("w0-> ", w0output);
-        console.log("w1-> ", w1output);
-    
         w0 = w0 + (learning_rate * w0sum);
         w1 = w1 + (learning_rate * w1sum);
         
-        // if(Math.abs(err/n) < error_tolerance) {
-            console.log('err->', err/n);
-            console.log(`i-> ${iteration+1} w0 -> {${w0}} and w1 -> {${w1}}`);
-            // break;
-        // }
-        console.log('-----------------------------------------------');
+        console.log(`error-> ${err/n}\n`);
     }
 
     
 }
 
-// gradient_descent_stochastic_method();
+gradient_descent_stochastic_method();
 
