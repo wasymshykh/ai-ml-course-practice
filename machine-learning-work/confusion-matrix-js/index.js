@@ -1,17 +1,26 @@
-const actual = ['R', 'Y', 'B', 'B', 'Y', 'R', 'Y', 'G', 'G', 'B', 'R', 'Y', 'Y', 'Y', 'G']
-const predicted = ['R', 'G', 'B', 'R', 'Y', 'R', 'Y', 'Y', 'R', 'B', 'R', 'Y', 'R', 'B', 'G']
-
 class Confusion {
-
+    /**
+     * 
+     * Description: Validates data in parameter, populates class variables and extract classes from arrays
+     * @param {Array}   actual
+     * @param {Array}   predicted
+     * 
+    **/
     constructor (actual, predicted) {
         this._validate_data(actual, predicted);
         this._actual = actual
         this._predicted = predicted
         this._classes = []
-        this._extract_classes();
+        this._extract_classes()
     }
 
-    make_matrix () {
+    /**
+     * 
+     * Description: Creates an empty confusion matrix array w.r.t number of classes available
+     * @param {boolean}   display
+     * 
+    **/
+    make_matrix (display = false) {
         console.log('🚀 Making empty confusion matrix....\n');
         this._confusion_matrix = [];
         for (let i = 0; i < this._classes.length; i++) {
@@ -20,18 +29,69 @@ class Confusion {
                 this._confusion_matrix[i].push(0);
             }
         }
-        this.display_confusion_matrix();
+        if (display) {
+            this.display_confusion_matrix();
+        }
     }
 
-    populate_confusion_matrix () {
+    /**
+     * 
+     * Description: Populates the confusion matrix array w.r.t actual and predicted values
+     * @param {boolean}   display
+     * 
+    **/
+    populate_confusion_matrix (display = false) {
         console.log('🚀 Populating confusion matrix....\n');
         this._actual.forEach((actual, index) => {
             let predicted = this._predicted[index];
             this._confusion_matrix[this._classes.indexOf(predicted)][this._classes.indexOf(actual)] += 1
-        });
-        this.display_confusion_matrix()
+        })
+        if (display) {
+            this.display_confusion_matrix()
+        }
     }
 
+    /**
+     * 
+     * Description: Calculates presion and recall from confusion matrix data
+     * 
+    **/
+    calculate_precision_recall () {
+        
+        for (let i = 0; i < this._classes.length; i++) {
+            console.log('Calculating for ' + this._classes[i]);
+            let [TP, FP, FN, TN] = [0, 0, 0, 0];
+
+            for (let row = 0; row < this._confusion_matrix.length; row++) {
+                for (let column = 0; column < this._confusion_matrix[row].length; column++) {
+                    if (row == i && column == i) {
+                        TP = this._confusion_matrix[row][column]
+                    }
+                    else if (row == i) {
+                        FP += this._confusion_matrix[row][column]
+                    }
+                    else if (column == i) {
+                        FN += this._confusion_matrix[row][column]
+                    } else {
+                        TN += this._confusion_matrix[row][column]
+                    }
+                }
+            }
+
+            let precision = TP/(TP + FP)
+            let recall = TP/(TP + FN)
+
+            console.log(' Precision: ' + precision.toFixed(3) + ' (' + (precision * 100).toFixed(1) + '%)')
+            console.log(' Recall: ' + recall.toFixed(3) + '(' + (recall * 100).toFixed(1) + '%)\n')
+        }
+
+    }
+
+    /**
+     * 
+     * Description: Print confusion matrix to console
+     * 
+    **/
     display_confusion_matrix () {
         let str = ''
         // header
@@ -59,7 +119,12 @@ class Confusion {
         // print
         console.log(str)
     }
-
+ 
+    /**
+     * 
+     * Description: Extract all the classes from actual and predicted data
+     * 
+    **/
     _extract_classes () {
         this._actual.forEach((el, index) => {
             if (!this._classes.includes(el)) {
@@ -71,6 +136,11 @@ class Confusion {
         });
     }
 
+    /**
+     * 
+     * Description: Validate given data checks for variable type and length 
+     * 
+    **/
     _validate_data (actual, predicted) {
         if (typeof actual === 'undefined' || typeof predicted === 'undefined') {
             console.log('❌ Err!!! Actual and Predicted parameters are required....\n');
@@ -85,12 +155,15 @@ class Confusion {
             throw "Actual and Predicted must be of same length"
         }
     }
-
-    
-    
-
 }
+
+const actual = ['R', 'Y', 'B', 'B', 'Y', 'R', 'Y', 'G', 'G', 'B', 'R', 'Y', 'Y', 'Y', 'G']
+const predicted = ['R', 'G', 'B', 'R', 'Y', 'R', 'Y', 'Y', 'R', 'B', 'R', 'Y', 'R', 'B', 'G']
+
+// const actual = ['T', 'T', 'T', 'F', 'F', 'T', 'F', 'T', 'T', 'F', 'T', 'T', 'F', 'F', 'T']
+// const predicted = ['T', 'F', 'F', 'F', 'F', 'T', 'F', 'T', 'F', 'F', 'F', 'T', 'T', 'F', 'T']
 
 let o = new Confusion(actual, predicted)
 o.make_matrix()
-o.populate_confusion_matrix()
+o.populate_confusion_matrix(true)
+o.calculate_precision_recall()
